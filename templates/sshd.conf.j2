@@ -1,10 +1,10 @@
 [SSH]
 action=ufw[blocktype=deny]
        {% if "slack_webhook_url" in fail2ban_v %}slack[name=SSH, url={{ fail2ban_v.slack_webhook_url }}]{% endif %}
-bantime={{ fail2ban_v.bantime }}
+bantime={{ fail2ban_v.ban_time }}
 enabled=true
 filter=sshd
-findtime={{ fail2ban_v.findtime }}
+findtime={{ fail2ban_v.find_time }}
 ignoreip  = {{ fail2ban_v.ignored_ips | join(' ') }}
 logpath=/var/log/auth.log
-maxretry={{ fail2ban_v.maxretry }}
+maxretry={{ fail2ban_v.max_retries }}

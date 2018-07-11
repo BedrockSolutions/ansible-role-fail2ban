@@ -4,10 +4,10 @@
     schema:
       type: object
       properties:
-        bantime:
+        ban_time:
           type: integer
           default: 600
-        findtime:
+        find_time:
           type: integer
           default: 600
         ignored_ips:
@@ -18,17 +18,17 @@
           default:
             - 127.0.0.1/8
           minItems: 1
-        maxretries:
+        max_retries:
           type: integer
           default: 5
         slack_webhook_url:
           type: string
           format: url
       required:
-        - bantime
-        - findtime
+        - ban_time
+        - find_time
         - ignored_ips
-        - maxretries
+        - max_retries
     instance: "{{ fail2ban }}"
   register: fail2ban_validated
 
