@@ -1,0 +1,42 @@
+---
+
+- validate:
+    schema:
+      type: object
+      properties:
+        bantime:
+          type: integer
+          default: 600
+        findtime:
+          type: integer
+          default: 600
+        ignore_ips:
+          type: array
+          items:
+            type: string
+            format: ipv4
+          default:
+            - 127.0.0.1/8
+          minItems: 1
+        maxretries:
+          type: integer
+          default: 5
+        slack_webhook_url:
+          type: string
+          format: url
+      required:
+        - bantime
+        - findtime
+        - ignore_ips
+        - maxretries
+    instance: "{{ fail2ban }}"
+  register: fail2ban_validated
+
+- set_fact:
+    fail2ban_v: "{{ fail2ban_validated.result }}"
+
+- name: "Create sshd jail"
+  template:
+    src: sshd.conf.j2
+    dest: /etc/fail2ban/jail.d/sshd.conf
+  notify: fail2ban_restart

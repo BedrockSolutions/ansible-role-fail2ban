@@ -1,0 +1,22 @@
+---
+
+- name: 'Install fail2ban and configure defaults'
+  block:
+    - name: 'Install fail2ban and supporting packages'
+      apt:
+        name:
+          - python-pyinotify # enables more efficient file watching
+          - fail2ban
+        state: present
+
+    - name: "Install Slack notification action"
+      template:
+        src: slack.conf.j2
+        dest: /etc/fail2ban/action.d/slack.conf
+
+    - name: 'Remove unnecessary default files'
+      file:
+        path: '/etc/fail2ban/jail.d/defaults-debian.conf'
+        state: absent
+      notify: fail2ban_restart
+  become: yes

@@ -1,0 +1,17 @@
+---
+
+- validate:
+    schema:
+      type: object
+      properties:
+        command:
+          type: string
+          enum:
+            - dependency
+            - install
+      required:
+        - command
+    instance: "{{ fail2ban }}"
+
+- include_tasks: '{{ fail2ban.command }}.yml'
+  when: fail2ban.command != 'dependency'
