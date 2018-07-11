@@ -1,6 +1,7 @@
 [SSH]
 action=ufw[blocktype=deny]
-{% if "slack_webhook_url" in fail2ban_v %}       slack[name=SSH, url={{ fail2ban_v.slack_webhook_url }}]{% endif %}
+{% if "slack_webhook_url" in fail2ban_v %}       slack[name=SSH, url={{ fail2ban_v.slack_webhook_url }}]
+{% endif %}
 bantime={{ fail2ban_v.ban_time }}
 enabled=true
 filter=sshd
