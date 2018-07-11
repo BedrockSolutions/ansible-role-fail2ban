@@ -40,3 +40,4 @@
     src: sshd.conf.j2
     dest: /etc/fail2ban/jail.d/sshd.conf
   notify: fail2ban_restart
+  become: yes
