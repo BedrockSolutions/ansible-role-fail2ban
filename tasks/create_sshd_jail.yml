@@ -10,7 +10,7 @@
         findtime:
           type: integer
           default: 600
-        ignore_ips:
+        ignored_ips:
           type: array
           items:
             type: string
@@ -27,7 +27,7 @@
       required:
         - bantime
         - findtime
-        - ignore_ips
+        - ignored_ips
         - maxretries
     instance: "{{ fail2ban }}"
   register: fail2ban_validated
