@@ -23,7 +23,7 @@
           default: 5
         slack_webhook_url:
           type: string
-          format: url
+          format: uri
       required:
         - ban_time
         - find_time
