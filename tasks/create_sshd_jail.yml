@@ -1,43 +1,46 @@
 ---
 
-- validate:
-    schema:
-      type: object
-      properties:
-        ban_time:
-          type: integer
-          default: 600
-        find_time:
-          type: integer
-          default: 600
-        ignored_ips:
-          type: array
-          items:
-            type: string
-            format: ipv4
-          default:
-            - 127.0.0.1/8
-          minItems: 1
-        max_retries:
-          type: integer
-          default: 5
-        slack_webhook_url:
-          type: string
-          format: uri
-      required:
-        - ban_time
-        - find_time
-        - ignored_ips
-        - max_retries
-    instance: "{{ fail2ban }}"
-  register: fail2ban_validated
+- block:
+    - validate:
+        schema:
+          type: object
+          properties:
+            ban_time:
+              type: integer
+              default: 600
+            find_time:
+              type: integer
+              default: 600
+            ignored_ips:
+              type: array
+              items:
+                type: string
+                format: ipv4
+              default:
+                - 127.0.0.1/8
+              minItems: 1
+            max_retries:
+              type: integer
+              default: 5
+            slack_webhook_url:
+              type: string
+              format: uri
+          required:
+            - ban_time
+            - find_time
+            - ignored_ips
+            - max_retries
+        instance: "{{ fail2ban }}"
+      register: fail2ban_validated
 
-- set_fact:
-    fail2ban_v: "{{ fail2ban_validated.result }}"
+    - set_fact:
+        fail2ban_v: "{{ fail2ban_validated.result }}"
 
-- name: "Create sshd jail"
-  template:
-    src: sshd.conf.j2
-    dest: /etc/fail2ban/jail.d/sshd.conf
-  notify: fail2ban_restart
-  become: yes
+    - name: "Create sshd jail"
+      template:
+        src: sshd.conf.j2
+        dest: /etc/fail2ban/jail.d/sshd.conf
+      notify: fail2ban_restart
+      become: yes
+  tags:
+    - fail2ban_create_sshd_jail
