@@ -54,6 +54,6 @@
               tag fail2ban
             </source>
           filename: fail2ban
-      when: stackdriver_v.stackdriver_log_ingestion
+      when: fail2ban_v.stackdriver_log_ingestion
   tags:
     - fail2ban_install
