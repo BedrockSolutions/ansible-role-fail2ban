@@ -5,11 +5,11 @@
         schema:
           type: object
           properties:
-            stackdriver_log_ingestion:
+            stackdriver_ingest_log:
               type: boolean
               default: no
           required:
-            - stackdriver_log_ingestion
+            - stackdriver_ingest_log
         instance: "{{ fail2ban }}"
       register: fail2ban_validated
 
@@ -54,6 +54,6 @@
               tag fail2ban
             </source>
           filename: fail2ban
-      when: fail2ban_v.stackdriver_log_ingestion
+      when: fail2ban_v.stackdriver_ingest_log
   tags:
     - fail2ban_install
