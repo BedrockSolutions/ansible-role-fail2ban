@@ -55,11 +55,12 @@
             </source>
             <filter fail2ban>
               @type record_transformer
+              enable_ruby
               renew_record true
               keep_keys level,module
               <record>
                 hostname ${hostname}
-                message ${hostname record["message"]}
+                message ${hostname << " " << record["message"]}
               </record>
             </filter>
 
