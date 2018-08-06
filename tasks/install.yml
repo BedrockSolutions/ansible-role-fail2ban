@@ -53,6 +53,16 @@
               pos_file /var/lib/google-fluentd/pos/fail2ban.pos
               tag fail2ban
             </source>
+            <filter fail2ban>
+              @type record_transformer
+              renew_record true
+              keep_keys level,module
+              <record>
+                hostname ${hostname}
+                message ${hostname record["message"]}
+              </record>
+            </filter>
+
           filename: fail2ban
       when: fail2ban_v.stackdriver_ingest_log
   tags:
