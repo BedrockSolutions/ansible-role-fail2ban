@@ -1,21 +1,4 @@
 ---
 
-- block:
-    - validate:
-        schema:
-          type: object
-          properties:
-            command:
-              type: string
-              enum:
-                - create_sshd_jail
-                - dependency
-                - install
-          required:
-            - command
-        instance: "{{ fail2ban }}"
-
-    - include_tasks: '{{ fail2ban.command }}.yml'
-      when: fail2ban.command != 'dependency'
-  tags:
-    - fail2ban
+- include_tasks: fail2ban.yml
+  when: (fail2ban is not defined) or ('command' not in fail2ban) or (fail2ban.command != 'dependency')
