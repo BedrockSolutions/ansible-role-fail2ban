@@ -16,9 +16,7 @@
               items:
                 type: string
                 format: ipv4
-              default:
-                - 127.0.0.1/8
-              minItems: 1
+              default: []
             max_retries:
               type: integer
               default: 5
