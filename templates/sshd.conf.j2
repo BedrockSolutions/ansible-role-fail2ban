@@ -7,6 +7,6 @@ bantime={{ fail2ban_v.ban_time }}
 enabled=true
 filter=sshd
 findtime={{ fail2ban_v.find_time }}
-ignoreip  = {{ (fail2ban_v.ignored_ips + ['127.0.0.0/8']) | join(' ') }}
+ignoreip={{ (fail2ban_v.ignored_ips + ['127.0.0.0/8']) | join(' ') }}
 logpath=/var/log/auth.log
 maxretry={{ fail2ban_v.max_retries }}
