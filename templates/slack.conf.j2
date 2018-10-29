@@ -10,13 +10,13 @@
 # Notes.:  command executed once at the start of Fail2Ban.
 # Values:  CMD
 #
-actionstart = curl -s -o /dev/null -X POST -H 'Content-type: application/json' --data '{"text": "{{ inventory_hostname }}: <name> jail has started"}' <url>
+actionstart = curl -s -o /dev/null -X POST -H 'Content-type: application/json' --data "{\"text\": \"$(hostname): <name> jail has started\"}" <url>
 
 # Option:  actionstop
 # Notes.:  command executed once at the end of Fail2Ban
 # Values:  CMD
 #
-actionstop = curl -s -o /dev/null -X POST -H 'Content-type: application/json' --data '{"text": "{{ inventory_hostname }}: <name> jail has stopped"}' <url>
+actionstop = curl -s -o /dev/null -X POST -H 'Content-type: application/json' --data "{\"text\": \"$(hostname): <name> jail has stopped\"}" <url>
 
 # Option:  actioncheck
 # Notes.:  command executed once before each actionban command
@@ -33,7 +33,7 @@ actioncheck =
 # Values:  CMD
 #
 
-actionban = curl -s -o /dev/null -X POST -H 'Content-type: application/json' --data '{"text": "{{ inventory_hostname }}: <name> banned IP *<ip>* for <failures> failure(s)"}' <url>
+actionban = curl -s -o /dev/null -X POST -H 'Content-type: application/json' --data "{\"text\": \"$(hostname): <name> banned IP *<ip>* for <failures> failure(s)\"}" <url>
 
 # Option:  actionunban
 # Notes.:  command executed when unbanning an IP. Take care that the
@@ -44,7 +44,7 @@ actionban = curl -s -o /dev/null -X POST -H 'Content-type: application/json' --d
 # Values:  CMD
 #
 
-actionunban = curl -s -o /dev/null -X POST -H 'Content-type: application/json' --data '{"text":"{{ inventory_hostname }}: <name> unbanned IP *<ip>*"}' <url>
+actionunban = curl -s -o /dev/null -X POST -H 'Content-type: application/json' --data "{\"text\": \"$(hostname): <name> unbanned IP *<ip>*\"}" <url>
 
 [Init]
 
