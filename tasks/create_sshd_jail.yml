@@ -6,10 +6,18 @@
           type: object
           properties:
             ban_time:
-              type: integer
+              oneOf:
+                - type: integer
+                  minimum: 1
+                - type: string
+                  pattern: ^[0-9]+$
               default: 600
             find_time:
-              type: integer
+              oneOf:
+                - type: integer
+                  minimum: 1
+                - type: string
+                  pattern: ^[0-9]+$
               default: 600
             ignored_ips:
               type: array
@@ -18,7 +26,11 @@
                 format: ipv4
               default: []
             max_retries:
-              type: integer
+              oneOf:
+                - type: integer
+                  minimum: 1
+                - type: string
+                  pattern: ^[0-9]+$
               default: 5
             slack_webhook_url:
               type: string
